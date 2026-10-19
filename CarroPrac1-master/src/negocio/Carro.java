@@ -3,42 +3,59 @@ package negocio;
 public class Carro {
     private int potencia;
     private double velocidad;
+    //atributo de clase
+    private static int numCarros = 0;
+    //constante de clase
+    private static final double IVA = 0.15;
 
-    /*
-    Métodos para ingresar información
-    set()
-    "Siempre" el tipo de retorno en void
-    Siempre recibe un parámetro
-    paràmetro generalmente es del mismo tipo del atributo
-     */
+    public Carro(int potencia, double velocidad){
+      /*  this.potencia = potencia;
+        this.velocidad = velocidad;*/
+        //si  los atributos tienen validaciones utilizo el set()
+        setPotencia(potencia);
+        setVelocidad(velocidad);
+        numCarros++;
+    }
+
+    public Carro() {
+        numCarros++;
+    }
+
     public void setPotencia(int potencia){
-        //se actualiza solo si el dato es correcto
-        if(potencia>0)
-            this.potencia=potencia;
+        //almacenar solo si el dato es correcto
+        if(potencia > 0)
+            this.potencia = potencia;
     }
+
     public void setVelocidad(double velocidad){
-        //se actuliza si el dato es correcto sino se setea
-        if(velocidad<0)
-            velocidad=0;
-        this.velocidad=velocidad;
+        //actualizar si el dato es correcto sino setear el valor
+        if(velocidad < 0)
+            velocidad = 0;
+        this.velocidad = velocidad;
     }
-    /*
-    Metodo para sacar informacion
-    get()
-    siempre retorna valor
-    el tipo de retorno generalmente es del mismo tipo del atributo
-     */
+
     public int getPotencia(){
         return potencia;
     }
     public double getVelocidad(){
         return velocidad;
     }
-    public void acelerar(){
-        velocidad+=potencia;
 
+    public static int getNumCarros(){
+        return numCarros;
     }
-    void frenar (){
-        velocidad /=2;
+    public static double getIva(){
+        return IVA;
+    }
+
+    public double calcularPrecioTotal(double precio){
+        return precio + (precio * IVA);
+    }
+    public void acelerar(){
+        velocidad += potencia;
+    }
+
+    void frenar(){
+        velocidad /= 2;
     }
 }
